@@ -39,6 +39,8 @@ Spirit       Cape         Torso        Arms         Mask         Mouth        Bo
 
 ### Use it with VisiData
 If the `-s file.csv` flag is used, we can explore the output with [VisiData](https://www.visidata.org/).  
+![](./screenshot_vd_01.png)  
+![](./screenshot_vd_02.png)
 
 ### Embed a Lucha in a webpage
 Extract the svg in a file:
