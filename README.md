@@ -51,4 +51,4 @@ Spirit       Cape         Torso        Arms         Mask         Mouth        Bo
 
 Then include it in a html file or embed it (here /tmp/luchador7509.svg).
 
-![](./luchador7509.svg | width=120)
+<img src="./luchador7509.svg" width="120" />
