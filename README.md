@@ -1,7 +1,9 @@
 # LuchaData
 
 ## Puspose
-Get onchain (luchadores)[https://luchadores.io/] data.
+Get onchain [luchadores.io](https://luchadores.io/) data.
+
+<img src="./luchador7509.svg" width="120" />
 
 ## Requirements
 * Python3
@@ -11,9 +13,13 @@ Get onchain (luchadores)[https://luchadores.io/] data.
 Tested on Linux.
 
 ## Quickstart
+`get_luchadores_onchain.py` is autonomous and gets data onchain.  
+`get_dna_onchain.py` retrieves the dna onchain, in the events, and builds a simple database.csv which maps id and dna.  
+`get_luchador_info.py` prints and creates a .csv with all the data.  
+
 ```bash
-./getLuchadoresData.py -h                                       
-usage: getLuchadoresData.py [-h] [-o OUTPUT_DIR] [-s CSV_FILE] [ids [ids ...]]
+./get_luchadores_onchain.py -h                                       
+usage: get_luchadores_onchain.py [-h] [-d OUTPUT_DIR] [-o CSV_FILE] [ids [ids ...]]
 
 Query onchain Luchadores
 
@@ -22,13 +28,14 @@ positional arguments:
 
 optional arguments:
   -h, --help     show this help message and exit
-  -o OUTPUT_DIR  extracts svg images in folder
-  -s CSV_FILE    saves data into /path/file.csv
+  -d OUTPUT_DIR  extracts svg images in folder
+  -o CSV_FILE    saves data into /path/file.csv
+
 ``` 
 
 ## Output
 ```bash
- ./getLuchadoresData.py 6 7509 
+ ./get_luchadores_onchain.py 6 7509 
 Luchador #6    : (3 attrs) owner: 0x147B8869655Bc09f226955cc676fF78efe240cA8  -~-~-===( El Rosado )===-~-~-
 Spirit       Cape         Torso        Arms         Mask         Mouth        Bottoms      Boots       
  -           Classic       -           Gloves       Classic       -            -            -           
@@ -45,7 +52,7 @@ If the `-s file.csv` flag is used, we can explore the output with [VisiData](htt
 ### Embed a Lucha in a webpage
 Extract the svg in a file:
 ```bash
-./getLuchadoresData.py -o /tmp 7509
+./get_luchadores_onchain.py -o /tmp 7509
 Luchador #7509 : (1 attrs) owner: 0x52434Cd9e4e4F965a20c8576841CbAAC4b2bA30e /tmp/luchador7509.svg 
 Spirit       Cape         Torso        Arms         Mask         Mouth        Bottoms      Boots       
  -            -            -            -           Fierce        -            -            -

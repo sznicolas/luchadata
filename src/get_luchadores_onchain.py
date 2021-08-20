@@ -44,8 +44,8 @@ def set_web3_connexion():
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Query onchain Luchadores')
-    parser.add_argument('-o',  dest='output_dir', help="extracts svg images in folder")
-    parser.add_argument('-s',  dest='csv_file', help="saves data into /path/file.csv")
+    parser.add_argument('-d',  dest='output_dir', help="extracts svg images in folder")
+    parser.add_argument('-o',  dest='csv_file', help="saves data into /path/file.csv")
     parser.add_argument('ids', nargs='*', type=int, help='List of Luchadores Id (defalut: get them all)')
     return parser.parse_args()
 
