@@ -5,18 +5,31 @@ class Lucha:
         self._id = self._set_id(lucha_id)
         self._realname = "Luchador #" + str(self._id)
         self._dna = self._set_dna(dna)
-        self._attributes = OrderedDict() 
+        self._attributes = OrderedDict()
         self._set_attributes()
         self._base_color = self._set_base_color()
         self._alt_color = self._set_alt_color()
         self._eyes = self._set_eye_color()
-        self._skin = self._set_skin_color() 
+        self._skin = self._set_skin_color()
 
     def set_name(self, name):
         self._name = name
 
-    def get_name(self, name):
+    def set_owner(self, owner):
+        self._owner = owner
+
+    def short_owner(self):
+        if hasattr(self, '_owner'):
+            return self._owner[:8] + ".." + self._owner[-6:]
+        return ""
+
+    def get_name(self):
         return self._name
+
+    def fancy_name(self):
+        if hasattr(self, '_name'):
+            return f"-~-~-===( {self._name}  )===-~-~-"
+        return ""
 
     def get_realname(self):
         return self._realname
@@ -29,9 +42,9 @@ class Lucha:
         return _id
 
     def _set_dna(self, dna):
-        if len(dna) < 12:
+        if len(str(dna)) < 12:
             raise ValueError("Incorrect dna < 12: ", dna)
-        return dna
+        return str(dna)
 
     def _set_attributes(self):
         self._attributes['spirit'] = self._set_spirit(_nucleobase(self._dna, 0))
