@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 class Lucha:
-    def __init__(self, lucha_id=None, dna=None):
+    def __init__(self, lucha_id, dna=None):
         self._id = self._set_id(lucha_id)
         self._realname = "Luchador #" + str(self._id)
         self._dna = self._set_dna(dna)
@@ -131,6 +131,56 @@ class Lucha:
                 f"eyes: {self._eyes} skin: {self._skin}) "
                 f"Attrs: {self._attributes}"
         )
+    def to_svg(self):
+        svgname = "luchador" + str(self._id)
+        cape_hood = ""
+        if self._attributes.get('cape'):
+            cape_shoulders = ("<path class='lucha-alt' d='M20 10V9h-2v1h-1v1h4v-1zM5 9H4v1H3v1h4v-1H6V9z'/>"
+                    "<path fill='#000' opacity='.2' d='M6 9H4v1H3v1h4v-1H6zM20 10V9h-2v1h-1v1h4v-1z'/>")
+            if cape.get(self._attributes.get('cape')) == "Hooded":
+                cape_hood = ("<path class='lucha-alt' "
+                  "d='M18 4V3h-1V2h-1V1h-1V0H9v1H8v1H7v1H6v2H5v5h1V6h1V5h2V4h1V3h4v1h1v1h2v1h1v4h1V5h-1z'/>"
+                  "<g fill='#000'>"
+                  "<path d='M18 4V3h-1V2h-1V1h-1V0H9v1H8v1H7v1H6v2H5v5h1V5h1V4h1V3h1V2h6v1h1v1h1v1h1v5h1V5h-1z'"
+                  " opacity='.2'/><path d='M16 4V3h-1V2H9v1H8v1H7v1h2V4h1V3h4v1h1v1h2V4zM6 5h1v1H6zM17 5h1v1h-1z' "
+                  "opacity='.5'/></g>")
+        else:
+            cape_shoulders = ""
+        svg = (
+                f"<svg id='{svgname}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>"
+                "<style>#" + svgname + " .lucha-base { fill: #" + self._base_color + "; } "
+                "#" + svgname + " .lucha-alt { fill: #" + self._alt_color + "; } "
+                "#" + svgname + " .lucha-eyes { fill: #" + self._eyes + "; } "
+                "#" + svgname + " .lucha-skin { fill: #" + self._skin + "; } "
+                "#" + svgname + " .lucha-breathe { animation: 0.5s lucha-breathe infinite alternate ease-in-out; }"
+                " @keyframes lucha-breathe { from { transform: translateY(0px); } to { transform: translateY(1%); } }"
+                "</style>"
+                "<g class='lucha-breathe'>"
+                + spirit.get(self._attributes.get('spirit'), '')
+                + cape.get(self._attributes.get('cape'), '')
+                + "<path class='lucha-skin' d='M22 "
+                + "12v-1h-1v-1h-1V9h-1V5h-1V3h-1V2h-1V1h-1V0H9v1H8v1H7v1H6v2H5v4H4v1H3v1H2v1H1v8h4v-1h1v-2H5v-3h1v1h1v1h1v2h8v-2h1v-1h1v-1h1v3h-1v2h1v1h4v-8z'/>"
+                + torso.get(self._attributes.get('torso'), '')
+                + arms.get(self._attributes.get('arms'), '')
+                + cape_shoulders + "<path class='lucha-base' "
+                + "d='M18 5V3h-1V2h-1V1h-1V0H9v1H8v1H7v1H6v2H5v5h1v2h1v1h1v1h1v1h6v-1h1v-1h1v-1h1v-2h1V5z'/>"
+                + "<g class='lucha-alt'>"
+                + mask.get(self._attributes.get('mask'), '') + "</g>"
+                + cape_hood
+                + "<path fill='#FFF' d='M9 6H6v3h4V6zM17 6h-3v3h4V6z'/><path class='lucha-eyes' "
+                + "d='M16 6h-2v3h3V6zM8 6H7v3h3V6H9z'/><path fill='#FFF' d='M7 6h1v1H7zM16 6h1v1h-1z' "
+                + "opacity='.4'/><path fill='#000' d='M15 7h1v1h-1zM8 7h1v1H8z'/><path class='lucha-skin' "
+                + "d='M14 10H9v3h6v-3z'/><path fill='#000' opacity='.9' d='M13 11h-3v1h4v-1z'/>"
+                + mouth.get(self._attributes.get('mouth'), '')
+                + "</g><path class='lucha-skin' d='M16 23v-6H8v6H7v1h4v-4h2v4h4v-1z'/>"
+                + "<path class='lucha-base' d='M15 17H8v1h1v1h2v1h2v-1h2v-1h1v-1z'/>"
+                + bottoms.get(self._attributes.get('bottoms'), '')
+				+ "<path class='lucha-base' d='M9 21H8v2H7v1h4v-3h-1zM16 23v-2h-3v3h4v-1z'/>"
+                + boots.get(self._attributes.get('boots'), '')
+                + "</svg>"
+        )
+        return svg
+
     # Class methods
     def totalSupply():
         return 10_000
