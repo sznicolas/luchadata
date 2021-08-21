@@ -117,4 +117,4 @@ Luchador4502 Colors(ebebf7/2854e6 eyes: 3b6ba5 skin: 5a3214) Attrs: OrderedDict(
 ```
 
 ## Many thanks to my support team!
-<img src="img/luchador4476.svg" width="100" /> <img src="img/luchador4502.svg" width="100" /> <img src="img/luchador7507.svg" width="100" /> <img src="img/luchador7508.svg" width="100" /> <img src="img/luchador7509.svg" width="100" /> <img src="img/luchador5713.svg" width="100" /> <img src="img/luchador8010.svg" width="100" />
+<img src="img/luchador4476.svg" width="100" /> <img src="img/luchador5713.svg" width="100" /> <img src="img/luchador7507.svg" width="100" /> <img src="img/luchador7508.svg" width="100" /> <img src="img/luchador7509.svg" width="100" /> <img src="img/luchador8010.svg" width="100" /> <img src="img/luchador4502.svg" width="100" />
