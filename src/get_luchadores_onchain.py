@@ -46,11 +46,15 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Query onchain Luchadores')
     parser.add_argument('-d',  dest='output_dir', help="extracts svg images in folder")
     parser.add_argument('-o',  dest='csv_file', help="saves data into /path/file.csv")
+    parser.add_argument('-r',  dest='readable_svg', action="store_true",
+            help="saves svg file in an human readable format (parsed and indented by xml lib")
     parser.add_argument('ids', nargs='*', type=int, help='List of Luchadores Id (defalut: get them all)')
     return parser.parse_args()
 
 
 def main():
+    args = parse_args()
+
     # Get contracts informations
     web3 = set_web3_connexion()
     lucha_contract = web3.eth.contract(
@@ -61,7 +65,6 @@ def main():
     ).functions
     attributes_template = ["Spirit", "Cape", "Torso", "Arms", "Mask", "Mouth", "Bottoms", "Boots"]
 
-    args = parse_args()
     if args.csv_file:
         csv_header = ["id", "name", "owner"] + attributes_template
         fcsv = open(args.csv_file, 'w', encoding='UTF8')
@@ -84,8 +87,11 @@ def main():
         if args.output_dir:
             outfile = Path(args.output_dir, f"luchador{i}.svg")
             flucha = open(outfile, "w")
-            dom = xml.dom.minidom.parseString(lucha_contract.imageData(i).call())
-            flucha.write(dom.toprettyxml())
+            svg_content = lucha_contract.imageData(i).call()
+            if args.readable_svg:
+                dom = xml.dom.minidom.parseString(svg_content)
+                svg_content = dom.toprettyxml()
+            flucha.write(svg_content)
             flucha.close()
             lucha_output = f"{outfile}"
         # output
